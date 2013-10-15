@@ -1,0 +1,14 @@
+[twitter-auth]
+OAUTH_TOKEN = 11111111111111111111111111111111111111111111111111
+OAUTH_SECRET = aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+CONSUMER_KEY = kkkkkkkkkkkkkkkkkkkkkk 
+CONSUMER_SECRET = sssssssssssssssssssssssssssssssssssssssssss
+SCREEN_NAME = namenamename
+
+[vk-auth]
+VK_EMAIL = me@vk.com
+VK_PASS = vkpass
+VK_CLIENT_ID = 1111111
+
+[other]
+UPDATE_TIMEOUT = 90
