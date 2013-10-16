@@ -49,9 +49,10 @@ def main():
             token, expire_time, vk = get_vk_token()
         latest_tweet = get_latest_tweet()
         latest_vk_status = get_latest_vk_status(vk)
-        if latest_tweet != latest_vk_status:
-            vk.wall.post(message=latest_tweet)
-            print "Status updated", time.ctime(local_time)
+        if latest_tweet != latest_vk_status and \
+           "@" not in latest_tweet:
+                vk.wall.post(message=latest_tweet)
+                print "Status updated", time.ctime(local_time)
 
         time.sleep(float(UPDATE_TIMEOUT))
 
