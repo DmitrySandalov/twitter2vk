@@ -33,12 +33,22 @@ def get_vk_token():
 def get_latest_tweet():
     t = Twitter(auth=OAuth(OAUTH_TOKEN, OAUTH_SECRET,
                            CONSUMER_KEY, CONSUMER_SECRET))
-    return t.statuses.user_timeline(
-        screen_name=SCREEN_NAME)[0]['text']
+    try:
+        latest_tweet = t.statuses.user_timeline(
+                screen_name=SCREEN_NAME)[0]['text']
+    except:
+        latest_tweet = False
+        print "twitter error"
+    return latest_tweet
 
 
 def get_latest_vk_status(vk):
-    return vk.wall.get(count=1)[1]['text']
+    try:
+        latest_vk_status = vk.wall.get(count=1)[1]['text']
+    except:
+        latest_vk_status = False
+        print "vk error"
+    return latest_vk_status
 
 
 def main():
@@ -49,6 +59,9 @@ def main():
             token, expire_time, vk = get_vk_token()
         latest_tweet = get_latest_tweet()
         latest_vk_status = get_latest_vk_status(vk)
+        if not latest_tweet or not latest_vk_status:
+            time.sleep(float(UPDATE_TIMEOUT))
+            continue
         if latest_tweet != latest_vk_status and \
            "@" not in latest_tweet:
                 vk.wall.post(message=latest_tweet)
